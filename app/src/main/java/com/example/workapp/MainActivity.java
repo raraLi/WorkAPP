@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final long SPLASH_DELAY = 3000; // 3秒延迟时间
-    private static final long COUNTDOWN_INTERVAL = 1000; // 计时器间隔时间
-    private static final long COUNTDOWN_TOTAL_TIME = 3000; // 总倒计时时间
+    private static final long SPLASH_DELAY = 1000; // 3秒延迟时间
+    private static final long COUNTDOWN_INTERVAL = 100; // 计时器间隔时间
+    private static final long COUNTDOWN_TOTAL_TIME = 1000; // 总倒计时时间
 
     private Handler mHandler;
     private CountDownTimer mCountDownTimer;

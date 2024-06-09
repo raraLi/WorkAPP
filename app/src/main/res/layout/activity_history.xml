@@ -3,9 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/three_pigs">
   <RelativeLayout
       android:layout_width="match_parent"
+      android:layout_marginTop="15dp"
       android:layout_height="50dp">
     <ImageView
         android:id="@+id/history_iv_back"
@@ -18,14 +20,15 @@
         android:layout_height="wrap_content"
         android:text="历史记录"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
         android:layout_centerInParent="true"/>
     <ImageView
         android:id="@+id/history_iv_rili"
         android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
-        android:src="@mipmap/it_rili"
+        android:src="@drawable/it_rili"
         android:layout_alignParentRight="true"
         android:onClick="onClick"/>
   </RelativeLayout>
@@ -37,6 +40,8 @@
         android:id="@+id/history_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/aqua"
         android:text="2024年6月"/>
 
   </RelativeLayout>
