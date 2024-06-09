@@ -1,16 +1,16 @@
 package com.example.workapp.db;
 
-public class AccountBean {
-    int id;
-    String typename;   //类型
-    int sImageId;   //被选中类型图片
-    String beizhu;   //备注
-    float money;  //价格
-    String time ;  //保存时间字符串
-    int year;
-    int month;
-    int day;
-    int kind;   //类型  收入---1   支出---0
+public class AccountBean { // 定义一个公共类AccountBean
+    int id; // 账户记录的ID
+    String typename; // 账户记录的类型名称
+    int sImageId; // 被选中类型图片的资源ID
+    String beizhu; // 账户记录的备注信息
+    float money; // 账户记录的金额
+    String time; // 账户记录的保存时间（字符串格式）
+    int year; // 账户记录保存的年份
+    int month; // 账户记录保存的月份
+    int day; // 账户记录保存的日期
+    int kind; // 账户记录的种类（例如，支出或收入）
 
     public int getId() {
         return id;

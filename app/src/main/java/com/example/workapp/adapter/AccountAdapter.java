@@ -15,19 +15,22 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AccountAdapter extends BaseAdapter {
-    Context context;
-    List<AccountBean>mDatas;
-    LayoutInflater inflater;
-    int year,month,day;
+    // 成员变量
+    Context context; // 上下文对象
+    List<AccountBean> mDatas; // 存储AccountBean对象的列表
+    LayoutInflater inflater; // LayoutInflater对象，用于加载布局
+    int year, month, day; // 当前年份、月份和日期
 
+    // 构造函数，初始化成员变量
     public AccountAdapter(Context context, List<AccountBean> mDatas) {
         this.context = context;
         this.mDatas = mDatas;
-        inflater = LayoutInflater.from(context);
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        inflater = LayoutInflater.from(context); // 从上下文中获取LayoutInflater实例
+
+        Calendar calendar = Calendar.getInstance(); // 获取当前日期
+        year = calendar.get(Calendar.YEAR); // 获取当前年份
+        month = calendar.get(Calendar.MONTH) + 1; // 获取当前月份（注意月份是从0开始的，所以需要+1）
+        day = calendar.get(Calendar.DAY_OF_MONTH); // 获取当前日期
     }
 
     @Override
@@ -60,11 +63,12 @@ public class AccountAdapter extends BaseAdapter {
         holder.typeTv.setText(bean.getTypename());
         holder.beizhuTv.setText(bean.getBeizhu());
         holder.moneyTv.setText(bean.getMoney() + "信用点");
-        if (bean.getYear()==year&&bean.getMonth()==month&&bean.getDay()==day) {
-            String time = bean.getTime().split(" ")[1];
-            holder.timeTv.setText("今天 "+time);
-        }else {
-            holder.timeTv.setText(bean.getTime());
+        // 判断当前记录的日期是否与当前日期相同，如果相同则显示“今天”
+        if (bean.getYear() == year && bean.getMonth() == month && bean.getDay() == day) {
+            String time = bean.getTime().split(" ")[1]; // 获取时间部分（假设时间格式为"yyyy-MM-dd HH:mm:ss"）
+            holder.timeTv.setText("今天 " + time); // 设置时间显示为“今天 HH:mm:ss”
+        } else {
+            holder.timeTv.setText(bean.getTime()); // 如果日期不同，则直接显示完整时间
         }
         return convertView;
     }

@@ -75,9 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/item_mainlv_top_tv3"
-
             android:layout_marginTop="130dp"
-            android:layout_marginRight="-72dp"
+            android:layout_marginRight="-85dp"
             android:text="0 信用点"
             android:textColor="@color/black" />
 
@@ -95,7 +94,7 @@
         android:id="@+id/item_mainlv_top_tv_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="今日支出：0 信用点     今日收入：0 信用点"
+        android:text="今日支出： 0 信用点          今日收入： 0 信用点"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"/>
 </LinearLayout>

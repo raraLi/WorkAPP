@@ -25,6 +25,7 @@ import com.example.workapp.db.AccountBean;
 import com.example.workapp.db.DBManager;
 import com.example.workapp.db.TypeBean;
 import com.example.workapp.utils.BeiZhuDialog;
+import com.example.workapp.utils.ResourceUtil;
 import com.example.workapp.utils.SelectTimeDialog;
 
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                 String typename = typeBean.getTypename();
                 typeTv.setText(typename);
                 accountBean.setTypename(typename);
-                int simageId = typeBean.getSImagId();
+                int simageId = ResourceUtil.getSImage(typeBean.getSImagId());
                 typeIv.setImageResource(simageId);
                 accountBean.setsImageId(simageId);
             }

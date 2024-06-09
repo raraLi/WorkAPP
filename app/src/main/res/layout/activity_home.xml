@@ -21,13 +21,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/main_iv_logo"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:padding="10dp"
-            android:src="@drawable/logo" />
+
     </RelativeLayout>
 
     <ListView
@@ -39,6 +33,8 @@
         android:divider="@null"
         android:dividerHeight="6dp"
         android:scrollbars="none"/>
+
+    <!-- 底部导航栏 -->
 
     <LinearLayout
         android:id="@+id/layout_bottom_navigation"
@@ -89,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onClick"
-            android:text="设置每日预算"
+            android:text="设置每月预算"
             android:textColor="#333333"
             android:textSize="16sp"
             android:gravity="center"/>

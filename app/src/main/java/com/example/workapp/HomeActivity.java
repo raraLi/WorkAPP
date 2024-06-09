@@ -28,24 +28,30 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener { //定义ListView用于展示账户信息
     ListView todayLv;
-    List<AccountBean>mDatas;
+    // 用于存储从数据库加载的账户数据
+    List<AccountBean> mDatas;
+    // 适配器，用于将数据与ListView绑定
     private AccountAdapter adapter;
-    int year,month,day;
-    TextView topConTv,topOutTv,topInTv,topbudgetTv;
+    // 用于存储当前日期的年、月、日
+    int year, month, day;
+    // 顶部统计信息的TextView组件
+    TextView topConTv, topOutTv, topInTv, topbudgetTv;
+    // 用于切换显示/隐藏模式的ImageView
     ImageView topShowIv;
+    // SharedPreferences用于存储预算信息
     SharedPreferences preferences;
 
-
     private TextView textHome, textRecord, textHistory, textInstall;
-    private LayoutInflater headerView;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_home);
-        initTime();
+        setContentView(R.layout.activity_home); // 设置Activity的布局文件
+        initTime();// 初始化日期信息
+        // 获取SharedPreferences实例
         preferences = getSharedPreferences("budget", Context.MODE_PRIVATE);
         todayLv=findViewById(R.id.main_iv);
         addLVHeaderView();
@@ -66,9 +72,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         setLVLongClickListener();
-    }
-
-    private void setLVLongClickListener() {
+    }   // 初始化视图组件，这里只设置了ListView的长按监听器
+    private void setLVLongClickListener() { // 设置ListView的长按监听器，用于删除条目
         todayLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,6 +91,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    // 弹出删除对话框
     private void showDeleteItemDialog(final  AccountBean clickBean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示信息").setMessage("你要删啊щ(ºДºщ)")
@@ -105,6 +111,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    // 为ListView添加头部视图
     private void addLVHeaderView() {
         // Inflate the layout for the header view
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -116,6 +123,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         topbudgetTv = headerView.findViewById(R.id.item_mainlv_top_tv_budget);
         topConTv = headerView.findViewById(R.id.item_mainlv_top_tv_day);
         topShowIv = headerView.findViewById(R.id.item_mainlv_top_iv_hide);
+
 
         // Set click listeners for the views
         topbudgetTv.setOnClickListener(this);
@@ -130,7 +138,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
+    // 初始化日期信息
     private void initTime() {
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -138,6 +146,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         day = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    // 在Activity恢复时加载数据库数据和更新顶部统计信息
     @Override
     protected void onResume() {
         super.onResume();
@@ -145,11 +154,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setTopTvShow();
     }
 
+    // 更新顶部统计信息的显示
     private void setTopTvShow() {
-        //获取今日支出和收入总金额，显示在view当中
+
         float incomeOneDay = DBManager.getSumMoneyOneDay(year, month, day, 1);
         float outcomeOneDay = DBManager.getSumMoneyOneDay(year, month, day, 0);
-        String infoOneDay = "今日支出："+outcomeOneDay+"信用点" + " 今日收入： "+incomeOneDay+"信用点";
+        String infoOneDay = "今日支出： "+outcomeOneDay+"信用点" + " 今日收入： "+incomeOneDay+"信用点";
         topConTv.setText(infoOneDay);
 //
         float incomeOneMonth = DBManager.getSumMoneyOneMonth(year, month, 1);
@@ -166,7 +176,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // 加载数据库数据
+    // 从数据库加载数据并更新ListView
     private void loadDBData() {
         List<AccountBean> list = DBManager.getAccountListOneDayFromAccounttb(year,month,day);
         mDatas.clear();
@@ -174,11 +184,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         adapter.notifyDataSetChanged();
     }
 
+    // 处理底部导航文本视图的点击事件
     @Override
     public void onClick(View v) {
         Intent intent;
-        int viewId = v.getId(); // 将视图ID存储在变量中
-        
+        int viewId = v.getId();
+
         if (viewId == R.id.text_home) {
             intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
@@ -190,11 +201,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (viewId == R.id.text_install) {
             showBudgetDialog();
-        } else if (viewId == R.id.item_mainlv_top_iv_hide){
+        } else if (viewId == R.id.item_mainlv_top_iv_hide) {
             toggleShow();
         }
     }
 
+    // 弹出设置预算的对话框
     private void showBudgetDialog() {
         BudgetDialog budgetDialog = new BudgetDialog(this);
         budgetDialog.show();
@@ -214,15 +226,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     boolean isShow= true;
 
+
+    // 切换顶部统计信息的显示/隐藏模式
+
     private void toggleShow() {
-        if (isShow) {   //明文====》密文
+        if (isShow) {
             PasswordTransformationMethod passwordMethod = PasswordTransformationMethod.getInstance();
             topInTv.setTransformationMethod(passwordMethod);   //设置隐藏
             topOutTv.setTransformationMethod(passwordMethod);   //设置隐藏
             topbudgetTv.setTransformationMethod(passwordMethod);   //设置隐藏
             topShowIv.setImageResource(R.mipmap.ih_hide);
-            isShow = false;   //设置标志位为隐藏状态
-        }else{  //密文---》明文
+            isShow = false;
+        }else{
             HideReturnsTransformationMethod hideMethod = HideReturnsTransformationMethod.getInstance();
             topInTv.setTransformationMethod(hideMethod);   //设置隐藏
             topOutTv.setTransformationMethod(hideMethod);   //设置隐藏

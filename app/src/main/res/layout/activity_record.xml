@@ -26,6 +26,7 @@
             android:id="@+id/record_iv_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:onClick="onClick"
             android:src="@drawable/back"
             android:layout_marginLeft="10dp"/>
 

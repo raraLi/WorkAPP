@@ -68,7 +68,7 @@ public class CalebderDialog extends Dialog implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 calebderAdapter.selPos =position;
                 calebderAdapter.notifyDataSetInvalidated();
-                int mouth = position+1;
+                int mouth = position + 1;
                 int year = calebderAdapter.year;
                 onRefreshListener.onRefresh(selectPos,year,mouth);
                 cancel();
